@@ -1,62 +1,62 @@
 # Telegram Homelab Monitor
 
-Petit bot Telegram pour surveiller un serveur Docker maison :
-constantes système (CPU, RAM, disque, température) à la demande, et
-alertes automatiques quand un conteneur tombe ou revient en ligne.
+A small Telegram bot to monitor a self-hosted Docker server: on-demand system
+vitals (CPU, RAM, disk, temperature), plus automatic alerts when a container
+goes down or comes back online.
 
-## Fonctionnalités
+## Features
 
-- `/start` : message de bienvenue
-- `/status` : CPU, RAM, disque et température CPU en temps réel
-- Alertes automatiques **DOWN / UP** sur une liste de conteneurs Docker
+- `/start` — welcome message
+- `/status` — real-time CPU, RAM, disk and CPU temperature
+- Automatic **DOWN / UP** alerts for a list of Docker containers
 
 ## Installation
 
 ```bash
-git clone <ton-repo>
-cd telegram-homelab-bot
+git clone https://github.com/Zlsxa/tlg_bot_server_info.git
+cd tlg_bot_server_info
 
 python -m venv .venv
-source .venv/bin/activate        # Windows : .venv\Scripts\activate
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
 pip install -r requirements.txt
 ```
 
 ## Configuration
 
-Toute la configuration passe par un fichier `.env` (jamais commité).
+All configuration is handled through a `.env` file (never committed).
 
 ```bash
 cp .env.example .env
-# puis édite .env avec tes valeurs
+# then edit .env with your own values
 ```
 
 | Variable | Description |
 |---|---|
-| `TELEGRAM_TOKEN` | Token donné par [@BotFather](https://t.me/BotFather) |
-| `CHAT_ID_ALERTE` | Ton ID de chat, obtenu via [@userinfobot](https://t.me/userinfobot) |
-| `SERVER_NAME` | Nom affiché dans les messages (libre) |
-| `CONTENEURS_A_SURVEILLER` | Conteneurs à surveiller, séparés par des virgules |
-| `INTERVALLE_CHECK` | Intervalle de vérification en secondes (défaut : 60) |
+| `TELEGRAM_TOKEN` | Token issued by [@BotFather](https://t.me/BotFather) |
+| `CHAT_ID_ALERTE` | Your chat ID, obtained via [@userinfobot](https://t.me/userinfobot) |
+| `SERVER_NAME` | Name shown in messages (free text) |
+| `CONTENEURS_A_SURVEILLER` | Containers to monitor, comma-separated |
+| `INTERVALLE_CHECK` | Check interval in seconds (default: 60) |
 
-## Lancement
+## Running
 
 ```bash
 python bot.py
 ```
 
-Le bot a besoin d'un accès au socket Docker (`docker.from_env()`),
-donc lance-le sur la machine qui héberge les conteneurs, avec un
-utilisateur membre du groupe `docker`.
+The bot needs access to the Docker socket (`docker.from_env()`), so run it on
+the machine that hosts the containers, using a user that belongs to the
+`docker` group.
 
-## Sécurité
+## Security
 
-- Ne mets **jamais** ton token ou ton chat ID dans le code : tout est dans `.env`.
-- `.env` est ignoré par git (voir `.gitignore`). Vérifie avec `git status`
-  qu'il n'apparaît pas avant de pousser.
-- Si un token a déjà fuité (capture d'écran, commit, etc.), révoque-le
-  immédiatement via @BotFather et régénères-en un nouveau.
+- Never put your token or chat ID directly in the code — everything lives in `.env`.
+- `.env` is ignored by git (see `.gitignore`). Run `git status` and confirm it
+  does not appear before pushing.
+- If a token is ever exposed (screenshot, commit, etc.), revoke it immediately
+  via @BotFather and generate a new one.
 
-## Licence
+## License
 
-À toi de choisir (MIT par ex.).
+MIT (or any license of your choice).
