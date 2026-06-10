@@ -1,0 +1,18 @@
+# Secrets / config locale — NE JAMAIS COMMITER
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# OS / éditeurs
+.DS_Store
+.idea/
+.vscode/
+*.swp
